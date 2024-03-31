@@ -1,0 +1,1 @@
+Manual Stroop effect with colored words in red, green, blue, and yellow.

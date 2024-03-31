@@ -1,0 +1,85 @@
+bitmaps
+  instruction1
+  instruction2
+  correct
+  mistake
+  fixpoint
+  yellowyellow 
+  yellowgreen  
+  yellowblue   
+  yellowred    
+  redyellow    
+  redgreen     
+  redblue      
+  redred       
+  greenyellow  
+  greengreen   
+  greenblue    
+  greenred     
+  blueyellow   
+  bluegreen    
+  blueblue     
+  bluered      
+
+fonts
+  arial 20
+
+# table: write condition,stimulus,response
+
+table stroop
+  "yellow yellow 1" yellowyellow 4
+  "yellow green  0" yellowgreen  2
+  "yellow blue   0" yellowblue   3
+  "yellow red    0" yellowred    1
+  "red yellow    0" redyellow    4
+  "red green     0" redgreen     2
+  "red blue      0" redblue      3
+  "red red       1" redred       1
+  "green yellow  0" greenyellow  4
+  "green green   1" greengreen   2
+  "green blue    0" greenblue    3
+  "green red     0" greenred     1
+  "blue yellow   0" blueyellow   4
+  "blue green    0" bluegreen    2
+  "blue blue     1" blueblue     3
+  "blue red      0" bluered      1
+
+task stroop
+  table stroop
+  keys r g b y
+  delay 500
+  show bitmap fixpoint # stimulus 1
+  delay 200
+  clear 1 # remove fixpoint 
+  delay 100
+  show bitmap @2 # stimulus 2
+  readkey @3 2000
+  clear 2 # remove stimulus 2
+  if STATUS == CORRECT
+    show bitmap correct # stimulus 3 (feedback)
+  fi
+  if STATUS != CORRECT  # stimulus 3 (feedback)
+    show bitmap mistake
+  fi
+  delay 500
+  clear 3 # remove feedback stimulus
+  save BLOCKNAME @1 TABLEROW KEY STATUS RT
+
+message instruction1
+
+message instruction2
+
+block training
+  tasklist
+    stroop 40  # run the stroop task 40 trials.
+  end
+  feedback
+    text -100 0  "Your speed in correct trials"
+    set &StroopCon mean c8 ; select c4 == 1 && c7 == 1
+    set &StroopInc mean c8 ; select c4 == 0 && c7 == 1
+    set &StroopEffect expression &StroopInc - &StroopCon
+    text -100 50  &StroopCon ; prefix "congruent:   " ; postfix " ms"
+    text -100 100 &StroopInc ; prefix "incongruent: " ; postfix " ms"
+    text -100 150 &StroopEffect ; prefix "Your Stroop effect is incongruent minus congruent: " ; postfix " ms"
+    text -100 200 "Press space key to end"
+  end
