@@ -2,20 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class ColorNames : MonoBehaviour
 {
-    public Text color;
+    public TextMeshProUGUI colorName;
     // Start is called before the first frame update
     void Start()
     {
-        color.text = "Red";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        colorName.text = "Red";
     }
 }
