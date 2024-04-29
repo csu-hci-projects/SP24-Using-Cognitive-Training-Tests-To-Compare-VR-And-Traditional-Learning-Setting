@@ -8,6 +8,8 @@ public class ColorNames : MonoBehaviour
     public TextMeshProUGUI colorName; 
 
     private Dictionary<string, Color> colorMap;
+    private List<string> colorKeys;
+    private int currentIndex = 0;
 
     void Start()
     {
@@ -19,7 +21,18 @@ public class ColorNames : MonoBehaviour
             { "Orange", Color.red }      // "Orange" text will be displayed in red color
         };
 
-        DisplayColorName("Yellow");
+        colorKeys = new List<string>(colorMap.Keys); // Store the keys in a list for easy access
+        StartCoroutine(CycleColors());
+    }
+
+    IEnumerator CycleColors()
+    {
+        while (true)
+        {
+            DisplayColorName(colorKeys[currentIndex]);
+            currentIndex = (currentIndex + 1) % colorKeys.Count; // Loop back to the start after reaching the end
+            yield return new WaitForSeconds(3); // Wait for 3 seconds
+        }
     }
 
     void DisplayColorName(string colorNameString)
