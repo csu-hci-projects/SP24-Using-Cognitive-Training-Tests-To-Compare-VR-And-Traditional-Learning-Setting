@@ -16,9 +16,9 @@ public class ColorNames : MonoBehaviour
         colorMap = new Dictionary<string, Color>(){
             { "Red", Color.blue },    // "Red" text will be displayed in blue color
             { "Blue", Color.red },    // "Blue" text will be displayed in red color
-            { "Green", Color.magenta }, // "Green" text will be displayed in magenta color
+            { "Green", Color.yellow }, // "Green" text will be displayed in magenta color
             { "Yellow", Color.blue },  // "Yellow" text will be displayed in green color
-            { "Orange", Color.red },      // "Orange" text will be displayed in red color
+            { "Red", Color.red },      // "Orange" text will be displayed in red color
             { "Blue", Color.green },
             { "Red", Color.red },    
             { "Yellow", Color.green },

@@ -58,6 +58,7 @@ public class ColorNames : MonoBehaviour
             { "Green", Color.green },
             { "Red", Color.blue },
             { "Blue", Color.yellow },
+            { "Blue", Color.blue},
         };
 
         colorKeys = new List<string>(colorMap.Keys); // Store the keys in a list for easy access
