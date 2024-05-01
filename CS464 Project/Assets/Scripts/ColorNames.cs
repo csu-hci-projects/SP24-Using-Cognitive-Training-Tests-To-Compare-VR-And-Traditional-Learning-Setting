@@ -18,7 +18,47 @@ public class ColorNames : MonoBehaviour
             { "Blue", Color.red },    // "Blue" text will be displayed in red color
             { "Green", Color.magenta }, // "Green" text will be displayed in magenta color
             { "Yellow", Color.blue },  // "Yellow" text will be displayed in green color
-            { "Orange", Color.red }      // "Orange" text will be displayed in red color
+            { "Orange", Color.red },      // "Orange" text will be displayed in red color
+            { "Blue", Color.green },
+            { "Red", Color.red },    
+            { "Yellow", Color.green },
+            { "Green", Color.yellow},
+            { "Red", Color.green },
+            { "Blue", Color.red },
+            { "Yellow", Color.blue },
+            { "Green", Color.yellow },
+            { "Red", Color.blue },
+            { "Blue", Color.yellow },
+            { "Yellow", Color.red },
+            { "Green", Color.green },
+            { "Red", Color.yellow },
+            { "Blue", Color.green },
+            { "Yellow", Color.blue },
+            { "Green", Color.red },
+            { "Red", Color.red },
+            { "Blue", Color.blue },
+            { "Yellow", Color.yellow },
+            { "Green", Color.green },
+            { "Red", Color.blue },
+            { "Blue", Color.yellow },
+            { "Yellow", Color.red },
+            { "Green", Color.green },
+            { "Red", Color.yellow },
+            { "Blue", Color.green },
+            { "Yellow", Color.blue },
+            { "Green", Color.red },
+            { "Red", Color.red },
+            { "Blue", Color.blue },
+            { "Yellow", Color.yellow },
+            { "Green", Color.green },
+            { "Red", Color.green },
+            { "Blue", Color.red },
+            { "Yellow", Color.blue },
+            { "Green", Color.yellow },
+            { "Red", Color.blue },
+            { "Blue", Color.yellow },
+            { "Yellow", Color.red },
+            { "Green", Color.green }
         };
 
         colorKeys = new List<string>(colorMap.Keys); // Store the keys in a list for easy access
