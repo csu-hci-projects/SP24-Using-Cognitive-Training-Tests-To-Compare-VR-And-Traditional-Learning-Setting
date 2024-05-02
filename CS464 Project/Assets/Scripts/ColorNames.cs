@@ -17,7 +17,7 @@ public class ColorNames : MonoBehaviour
         colorNames = new List<string>() { "Yellow", "Blue", "Green", "Red" };
         textColors = new List<Color>() { Color.blue, Color.red, Color.green, Color.yellow };
         GenerateColorMap();
-        StartCoroutine(CycleColors());
+        StartCoroutine(CycleColors(1.2f)); 
     }
 
     void GenerateColorMap()
@@ -31,7 +31,7 @@ public class ColorNames : MonoBehaviour
         }
     }
 
-    IEnumerator CycleColors()
+    IEnumerator CycleColors(float waitTime)
     {
         List<string> allCombinations = GenerateAllCombinations(colorNames, textColors);
 
@@ -41,7 +41,7 @@ public class ColorNames : MonoBehaviour
             foreach (string combination in allCombinations)
             {
                 DisplayColorName(combination);
-                yield return new WaitForSeconds(2); // Wait for 3 seconds between each combination
+                yield return new WaitForSeconds(waitTime); 
             }
         }
     }
@@ -52,9 +52,9 @@ public class ColorNames : MonoBehaviour
         string colorName = parts[0];
         Color textColor = colorMap[colorName];
         
-        // Assuming colorName is your TextMeshProUGUI component
-        this.colorName.text = colorName; // Assign the color name string
-        this.colorName.color = textColor; // Assign the color
+        
+        this.colorName.text = colorName; 
+        this.colorName.color = textColor; 
     }
 
     List<string> GenerateAllCombinations(List<string> colorNames, List<Color> textColors)
