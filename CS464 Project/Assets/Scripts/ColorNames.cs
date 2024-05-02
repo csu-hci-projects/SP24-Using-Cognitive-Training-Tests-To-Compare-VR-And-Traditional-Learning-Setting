@@ -8,84 +8,54 @@ public class ColorNames : MonoBehaviour
     public TextMeshProUGUI colorName; 
 
     private Dictionary<string, Color> colorMap;
-    private List<string> colorKeys;
-    private int currentIndex = 0;
+    private List<string> colorNames;
+    private List<Color> textColors;
 
     void Start()
     {
-        colorMap = new Dictionary<string, Color>(){
-            { "Red", Color.blue },    // "Red" text will be displayed in blue color
-            { "Blue", Color.red },    // "Blue" text will be displayed in red color
-            { "Green", Color.yellow }, // "Green" text will be displayed in magenta color
-            { "Yellow", Color.blue },  // "Yellow" text will be displayed in green color
-            { "Red", Color.red },      // "Orange" text will be displayed in red color
-            { "Blue", Color.green },
-            { "Red", Color.red },    
-            { "Yellow", Color.green },
-            { "Green", Color.yellow},
-            { "Red", Color.green },
-            { "Blue", Color.red },
-            { "Yellow", Color.blue },
-            { "Green", Color.yellow },
-            { "Red", Color.blue },
-            { "Blue", Color.yellow },
-            { "Yellow", Color.red },
-            { "Green", Color.green },
-            { "Red", Color.yellow },
-            { "Blue", Color.green },
-            { "Yellow", Color.blue },
-            { "Green", Color.red },
-            { "Red", Color.red },
-            { "Blue", Color.blue },
-            { "Yellow", Color.yellow },
-            { "Green", Color.green },
-            { "Red", Color.blue },
-            { "Blue", Color.yellow },
-            { "Yellow", Color.red },
-            { "Green", Color.green },
-            { "Red", Color.yellow },
-            { "Blue", Color.green },
-            { "Yellow", Color.blue },
-            { "Green", Color.red },
-            { "Red", Color.red },
-            { "Blue", Color.blue },
-            { "Yellow", Color.yellow },
-            { "Green", Color.green },
-            { "Red", Color.green },
-            { "Blue", Color.red },
-            { "Yellow", Color.blue },
-            { "Green", Color.yellow },
-            { "Red", Color.blue },
-            { "Blue", Color.yellow },
-            { "Yellow", Color.red },
-            { "Green", Color.green }
-        };
-
-        colorKeys = new List<string>(colorMap.Keys); // Store the keys in a list for easy access
-        StartCoroutine(CycleColors());
+        colorMap = new Dictionary<string, Color>();
+        colorNames = new List<string>() { "Yellow", "Blue", "Green", "Red" };
+        textColors = new List<Color>() { Color.red, Color.yellow, Color.green, Color.blue };
+        StartCoroutine(CycleColors(1.2f)); 
     }
 
-    IEnumerator CycleColors()
+    IEnumerator CycleColors(float waitTime)
     {
         while (true)
         {
-            DisplayColorName(colorKeys[currentIndex]);
-            currentIndex = (currentIndex + 1) % colorKeys.Count; // Loop back to the start after reaching the end
-            yield return new WaitForSeconds(3); // Wait for 3 seconds
+            Shuffle(colorNames);
+
+            foreach (string colorName in colorNames)
+            {
+                Color textColor = GetRandomColor();
+                DisplayColorName(colorName, textColor);
+                yield return new WaitForSeconds(waitTime); 
+            }
         }
     }
 
-    void DisplayColorName(string colorNameString)
+    void DisplayColorName(string colorName, Color textColor)
     {
-        if (colorMap.TryGetValue(colorNameString, out Color textColor))
+        
+        this.colorName.text = colorName; 
+        this.colorName.color = textColor; 
+    }
+
+    Color GetRandomColor()
+    {
+        return textColors[Random.Range(0, textColors.Count)]; 
+    }
+
+    void Shuffle<T>(List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
         {
-            colorName.text = colorNameString;
-            colorName.color = textColor;
-        }
-        else
-        {
-            colorName.text = "Unknown Color";
-            colorName.color = Color.black; // Default to black if the color is not found
+            n--;
+            int k = Random.Range(0, n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
         }
     }
 }
