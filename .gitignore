@@ -74,3 +74,4 @@ crashlytics-build.properties
 # Mac-specific Unity files
 .DS_Store
 CS464 Project/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+CS464 Project (AR)/.vsconfig
