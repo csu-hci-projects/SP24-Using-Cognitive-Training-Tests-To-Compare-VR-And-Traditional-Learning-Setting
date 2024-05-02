@@ -15,61 +15,35 @@ public class ColorNames : MonoBehaviour
     {
         colorMap = new Dictionary<string, Color>();
         colorNames = new List<string>() { "Yellow", "Blue", "Green", "Red" };
-        textColors = new List<Color>() { Color.blue, Color.red, Color.green, Color.yellow };
-        GenerateColorMap();
-        StartCoroutine(CycleColors(1.2f)); 
-    }
-
-    void GenerateColorMap()
-    {
-        Shuffle(colorNames);
-        Shuffle(textColors);
-
-        for (int i = 0; i < colorNames.Count; i++)
-        {
-            colorMap.Add(colorNames[i], textColors[i]);
-        }
+        textColors = new List<Color>() { Color.red, Color.yellow, Color.green, Color.blue };
+        StartCoroutine(CycleColors(0.8f)); // Display color combinations every 0.8 seconds
     }
 
     IEnumerator CycleColors(float waitTime)
     {
-        List<string> allCombinations = GenerateAllCombinations(colorNames, textColors);
-
         while (true)
         {
-            Shuffle(allCombinations);
-            foreach (string combination in allCombinations)
+            Shuffle(colorNames);
+
+            foreach (string colorName in colorNames)
             {
-                DisplayColorName(combination);
-                yield return new WaitForSeconds(waitTime); 
+                Color textColor = GetRandomColor();
+                DisplayColorName(colorName, textColor);
+                yield return new WaitForSeconds(waitTime); // Wait for the specified time between each combination
             }
         }
     }
 
-    void DisplayColorName(string combination)
+    void DisplayColorName(string colorName, Color textColor)
     {
-        string[] parts = combination.Split('|');
-        string colorName = parts[0];
-        Color textColor = colorMap[colorName];
-        
-        
-        this.colorName.text = colorName; 
-        this.colorName.color = textColor; 
+        // Assuming colorName is your TextMeshProUGUI component
+        this.colorName.text = colorName; // Assign the color name string
+        this.colorName.color = textColor; // Assign the color
     }
 
-    List<string> GenerateAllCombinations(List<string> colorNames, List<Color> textColors)
+    Color GetRandomColor()
     {
-        List<string> combinations = new List<string>();
-
-        foreach (string colorName in colorNames)
-        {
-            foreach (Color textColor in textColors)
-            {
-                combinations.Add(colorName + "|" + textColor);
-            }
-        }
-
-        return combinations;
+        return textColors[Random.Range(0, textColors.Count)]; // Randomly select a color from the list
     }
 
     void Shuffle<T>(List<T> list)
