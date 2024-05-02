@@ -16,7 +16,7 @@ public class ColorNames : MonoBehaviour
         colorMap = new Dictionary<string, Color>();
         colorNames = new List<string>() { "Yellow", "Blue", "Green", "Red" };
         textColors = new List<Color>() { Color.red, Color.yellow, Color.green, Color.blue };
-        StartCoroutine(CycleColors(0.8f)); // Display color combinations every 0.8 seconds
+        StartCoroutine(CycleColors(1.2f)); 
     }
 
     IEnumerator CycleColors(float waitTime)
@@ -29,21 +29,21 @@ public class ColorNames : MonoBehaviour
             {
                 Color textColor = GetRandomColor();
                 DisplayColorName(colorName, textColor);
-                yield return new WaitForSeconds(waitTime); // Wait for the specified time between each combination
+                yield return new WaitForSeconds(waitTime); 
             }
         }
     }
 
     void DisplayColorName(string colorName, Color textColor)
     {
-        // Assuming colorName is your TextMeshProUGUI component
-        this.colorName.text = colorName; // Assign the color name string
-        this.colorName.color = textColor; // Assign the color
+        
+        this.colorName.text = colorName; 
+        this.colorName.color = textColor; 
     }
 
     Color GetRandomColor()
     {
-        return textColors[Random.Range(0, textColors.Count)]; // Randomly select a color from the list
+        return textColors[Random.Range(0, textColors.Count)]; 
     }
 
     void Shuffle<T>(List<T> list)
